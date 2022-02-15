@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>Welcome to box site</title>
+	</head>
+	<body>
+		{% if not me%}
+		<p>
+			Register
+			<form action="/register" method="GET">
+				<input type="text" name="username" value=""/>
+				<input type="password" name="passwornd" value=""/>
+				<input type="submit"/>
+			</form>
+		<p>
+		<p>
+			Login
+			<form action="/login" method="POST">
+				<input type="text" name="username" value=""/>
+				<input type="password" name="passwornd" value=""/>
+				<input type="submit"/>
+			</form>
+		</p>
+		<p>Users on site: {{ Number_of_users}}
+		<p>
+		{% if message %}
+		<p>
+			{{message}}
+		<p>
+		{% endif %}
+	{% endif %}
+	{% if me %}
+		<table>
+			<tr>
+				<td>
+						<table>
+							{% for mes in messages %}
+							<tr><td>
+				<a href='/message/{{mes['idx']}}'>{{mes['frm']+' '+ mes["date"]}}</a>
+			</td></tr>
+				{%endfor%}
+			</table>
+				</td>
+					<form action="/send" method="post">
+						<select name='username'>
+							{% for mes in messages %}
+								<option> {{u}}</option>
+							{%endfor%}
+							<textarea name='message'></textarea>
+							<inpur type="submit"/>
+						</form>
+				<td>
+
+				</td>
+			</tr>
+		</table>
+		<p>Logged in as {{me}}</p>
+		<a href="/logout">Logout</a>
+		{% endif %}
+	</body>
+</html>
